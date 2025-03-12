@@ -1,0 +1,13 @@
+courses = {
+    "Code:" "CMSC-3380",
+    "Title:" "Python",
+}
+
+students = {
+    student1 = {
+        "Name:" "John",
+        "Major:" "Computer Science",
+        "Email:" "ger9822@pennwest.edu",
+        
+    }
+}

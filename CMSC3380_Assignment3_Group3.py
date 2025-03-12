@@ -5,7 +5,6 @@
 
 
 
-
 print("Menu: \n 1. Add a course \n 2. Remove a course \n 3. View all courses \n "
 "4. Add a student \n 5. Remove a student \n 6. View all students \n 7. Enroll a student in a course \n "
 "8. Unenroll a student from a course \n 9. List student course \n 0. Quit\n")
