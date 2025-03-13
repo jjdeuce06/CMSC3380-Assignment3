@@ -3,6 +3,50 @@
 
 import os, sys
 
+
+def add_course():
+    print("Adding a course...")
+
+def remove_course():
+    print("Removing a course...")
+
+def view_all_courses():
+    print("Viewing all courses...")
+
+def add_student():
+    print("Adding a student...")
+
+def remove_student():
+    print("Removing a student...")
+
+def view_all_students():
+    print("Viewing all students...")
+
+def enroll_student():
+    print("Enrolling a student...")
+
+def unenroll_student():
+    print("Unenrolling a student...")
+
+def list_student_courses():
+    print("Listing student courses...")
+
+# Display menu
+def show_menu():
+    print("""
+    Menu:
+    1. Add a course
+    2. Remove a course
+    3. View all courses
+    4. Add a student
+    5. Remove a student
+    6. View all students
+    7. Enroll a student in a course
+    8. Unenroll a student from a course
+    9. List student courses
+    0. Quit
+    """)
+
 courses = {
     "CMSC3380": "Python",
 }
@@ -13,9 +57,7 @@ students = {
 
 try:
     f1 = open("CMSC3380_Assignment3_Group3.dat", "wb")  #opens file for writing binary
-    print("Menu: \n 1. Add a course \n 2. Remove a course \n 3. View all courses \n "
-    "4. Add a student \n 5. Remove a student \n 6. View all students \n 7. Enroll a student in a course \n "
-    "8. Unenroll a student from a course \n 9. List student course \n 0. Quit\n")
+    show_menu()  #calls show_menu function to display menu
     user_choice = input("Enter an option from the menu: ")
 
     while user_choice != '0':
@@ -40,10 +82,9 @@ try:
         else:
             print("Invalid input, please enter a valid option")
         
-        print("Menu: \n 1. Add a course \n 2. Remove a course \n 3. View all courses \n "
-            "4. Add a student \n 5. Remove a student \n 6. View all students \n 7. Enroll a student in a course \n "
-            "8. Unenroll a student from a course \n 9. List student course \n 0. Quit\n")
+        show_menu()  #calls show_menu function to display menu
         user_choice = input("Enter an option from the menu: ")
-                
+    print("Exiting program...")
+             
 except FileNotFoundError:   #FileNotFoundError exception, message printed
     print("File not found")
