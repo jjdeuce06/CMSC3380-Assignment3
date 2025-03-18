@@ -53,7 +53,7 @@ def add_student(code, name, major, email):
     print("Adding a student...")
     #Program will try to add the passed in student ID, name, major, and email to the dictionary
     try:
-        students[code]={"Name":name, "Major": major,"Email":email}
+        students[code]={"Name":name, "Major": major,"Email":email, "Courses":[]}
 
     except KeyError:
         print("student already exists")
@@ -75,13 +75,34 @@ def view_all_students():
         print(f"{key}: {value}")
 
 
-def enroll_student(id, code):
-    print("Enrolling a student in a course...")
+def enroll_student(course, student):
+
+    if (courses.get(course)): #if course exists
+        if(students.get(student)):
+            print("Enrolling a student...")
+            try:
+                students[student]["Courses"].append(courses[course])
+            except KeyError:
+                print("Error enrolling student")
+        else:
+            print("Student ID does not exist.")
+    else:
+        print("Course does not exist.")
 
 
+def unenroll_student(course,student):
 
-def unenroll_student(id, code):
-    print("Unenrolling a student...")
+    if (courses.get(course)): #if course exists
+        if(students.get(student)):
+            print("Unenrolling a student...")
+            try:
+                del students[student]["Courses"][students[student]["Courses"].index(courses[course])]
+            except KeyError:
+                print("Error unenrolling student")
+        else:
+            print("Student ID does not exist.")
+    else:
+        print("Course does not exist.")
 
 #List student courses function
 def list_student_courses(id):
@@ -130,26 +151,40 @@ try:
             remove_course(new_course)
             pickle.dump(courses, f1)  # writes courses dictionary to file
         elif user_choice == '3':
+            #View all courses function call
             view_all_courses()
         elif user_choice == '4':
+            #Get the information needed for the add_student function
             new_Id=input("Enter the student ID: ")
-            new_name=input("enter the student name: ")
-            new_major=input("Enter the student's major")
-            new_email=input("enter the student's email")
+            new_name=input("Enter the student name: ")
+            new_major=input("Enter the student's major: ")
+            new_email=input("Enter the student's email: ")
             add_student(new_Id,new_name,new_major,new_email)
         elif user_choice == '5':
+            #Get the student ID to be removed
             new_name=input("Enter the student id to be deleted: ")
             remove_student(new_name)
         elif user_choice == '6':
+            #View all students function
             view_all_students()
         elif user_choice == '7':
-            enroll_student()
+            #Get the student ID and course ID to enroll the student in
+            student=input("Enter the student's ID to add course: ")
+            new_course=input("Enter the course ID to add: ")
+            enroll_student(new_course,student)
+
         elif user_choice == '8':
-            unenroll_student()
+            #Get the student ID and course ID to unenroll the student from
+            student = input("Enter the student's ID to remove course: ")
+            new_course = input("Enter the course ID to remove: ")
+            unenroll_student(new_course,student)
+
         elif user_choice == '9':
+            #Get the student ID to list the courses the student is taking
             new_Id=input("Enter the student ID: ")
             list_student_courses(new_Id)
         else:
+            #If the user enters an invalid option, print an error message
             print("Invalid input, please enter a valid option")
 
         #Close the file and reopen it in append binary mode
@@ -159,7 +194,7 @@ try:
         f1.close()
         f1 = open("CMSC3380_Assignment3_Group3.dat", "wb")
 
-
+        input("Press any key to continue...")
         show_menu()  # calls show_menu function to display menu
         user_choice = input("Enter an option from the menu: ")
     print("Exiting program...")
